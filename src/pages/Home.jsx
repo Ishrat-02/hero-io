@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import apps from "../data/apps";
 
-// ── helpers ──────────────────────────────────────────────
 function formatDownloads(n) {
   if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + "B+";
-  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M+";
-  if (n >= 1_000) return (n / 1_000).toFixed(0) + "K+";
+  if (n >= 1_000_000)     return (n / 1_000_000).toFixed(1) + "M+";
+  if (n >= 1_000)         return (n / 1_000).toFixed(0) + "K+";
   return n.toString();
 }
 
@@ -23,7 +22,6 @@ function StarRating({ rating }) {
   );
 }
 
-// ── App Card ─────────────────────────────────────────────
 function AppCard({ app }) {
   return (
     <Link to={`/apps/${app.id}`}
@@ -31,7 +29,9 @@ function AppCard({ app }) {
       <div className="w-16 h-16 rounded-2xl overflow-hidden bg-dark-border flex items-center justify-center">
         <img src={app.image} alt={app.title}
           className="w-full h-full object-contain p-1"
-          onError={(e) => { e.target.src = "https://placehold.co/64x64/1A1A2E/7C3AED?text=" + app.title[0]; }} />
+          onError={(e) => {
+            e.target.src = `https://placehold.co/64x64/1A1A2E/7C3AED?text=${app.title[0]}`;
+          }} />
       </div>
       <div>
         <h3 className="font-display font-semibold text-white text-sm">{app.title}</h3>
@@ -45,7 +45,6 @@ function AppCard({ app }) {
   );
 }
 
-// ── Stat Card ─────────────────────────────────────────────
 function StatCard({ icon, value, label }) {
   return (
     <div className="bg-dark-card border border-dark-border rounded-2xl p-6 flex items-center gap-4">
@@ -60,12 +59,10 @@ function StatCard({ icon, value, label }) {
   );
 }
 
-// ── Page ──────────────────────────────────────────────────
 export default function Home() {
   const topApps = apps.slice(0, 8);
-
   const totalDownloads = apps.reduce((sum, a) => sum + a.downloads, 0);
-  const totalReviews = apps.reduce((sum, a) => sum + a.reviews, 0);
+  const totalReviews   = apps.reduce((sum, a) => sum + a.reviews, 0);
 
   return (
     <div className="page-enter">
@@ -78,18 +75,15 @@ export default function Home() {
               <span className="w-1.5 h-1.5 rounded-full bg-primary-light animate-pulse"></span>
               #1 App Discovery Platform
             </div>
-
             <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
               Discover the{" "}
               <span className="gradient-text">Best Apps</span>{" "}
               for You
             </h1>
-
             <p className="text-gray-400 text-lg mb-10 leading-relaxed">
               Explore thousands of top-rated apps handpicked for every need.
               From productivity to entertainment — find your next favorite app.
             </p>
-
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://apps.apple.com" target="_blank" rel="noreferrer"
                 className="flex items-center justify-center gap-3 px-6 py-3 rounded-xl bg-white text-dark font-semibold hover:bg-gray-100 transition-colors">
@@ -113,9 +107,9 @@ export default function Home() {
       {/* ── Stats ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <StatCard icon="📱" value={apps.length + "+"} label="Total Apps" />
           <StatCard icon="⬇️" value={formatDownloads(totalDownloads)} label="Total Downloads" />
-          <StatCard icon="⭐" value={totalReviews.toLocaleString()} label="User Reviews" />
+          <StatCard icon="⭐" value={apps.length + "+"} label="Top Rated Apps" />
+          <StatCard icon="💬" value={formatDownloads(totalReviews)} label="User Reviews" />
         </div>
       </section>
 

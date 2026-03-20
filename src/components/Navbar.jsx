@@ -48,7 +48,7 @@ export default function Navbar() {
 
           {/* Contribution Button */}
           
-         <a   href="https://github.com"
+          <a  href="https://github.com"
             target="_blank"
             rel="noreferrer"
             className="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors glow-sm"
