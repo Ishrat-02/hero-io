@@ -6,11 +6,11 @@ A modern app discovery platform where users can browse, search, and install thei
 
 ## Live Demo
 
-[]
+[https://69bfa3ec7955c606e9fa9b69--rococo-dolphin-0ee7eb.netlify.app/]
 
 ## GitHub Repository
 
-[]
+[https://github.com/Ishrat-02/hero-io]
 
 
 
